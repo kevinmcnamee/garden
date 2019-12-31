@@ -24,7 +24,8 @@ defmodule GardenFirmware.Application do
     [
       # Children that only run on the host
       # Starts a worker by calling: GardenFirmware.Worker.start_link(arg)
-      {GardenFirmware.Sensors, []},
+      GardenFirmware.Dht,
+      GardenFirmware.Ui
     ]
   end
 

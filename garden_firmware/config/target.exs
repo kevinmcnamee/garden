@@ -31,7 +31,7 @@ config :nerves_firmware_ssh,
 node_name = if Mix.env() != :prod, do: "garden_firmware"
 
 config :nerves_init_gadget,
-  mdns_domain: "nerves.local",
+  mdns_domain: "garden.local",
   node_name: node_name,
   node_host: :mdns_domain,
   ifname: "eth0",
