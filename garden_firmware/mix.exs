@@ -39,7 +39,7 @@ defmodule GardenFirmware.MixProject do
   defp deps do
     [
       # Dependencies for all targets
-      {:garden_ui, path: "../garden_ui"},
+      {:ui, path: "../ui"},
       {:nerves, "~> 1.5.0", runtime: false},
       {:shoehorn, "~> 0.6"},
       {:ring_logger, "~> 0.6"},

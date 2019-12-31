@@ -17,7 +17,7 @@ defmodule GardenFirmware.Ui.Reporter do
   end
 
   defp broadcast_to_ui(interval) do
-    GardenUiWeb.Endpoint.broadcast("state", "reported", GardenFirmware.Dht.read())
+    UiWeb.Endpoint.broadcast("state", "reported", GardenFirmware.Dht.read())
     Process.send_after(self(), :broadcast_to_ui, interval)
   end
 end
