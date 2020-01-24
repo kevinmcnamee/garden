@@ -18,7 +18,9 @@ defmodule UiWeb.Router do
   scope "/", UiWeb do
     pipe_through(:browser)
 
-    get("/", PageController, :index)
+    get("/", DashboardController, :index)
+
+    get("/image/:timestamp", ImageController, :show)
   end
 
   # Other scopes may use custom stacks.

@@ -15,7 +15,8 @@ config :ui, UiWeb.Endpoint,
   url: [host: "garden.local", port: 80],
   root: Path.dirname(__DIR__),
   server: true,
-  render_errors: [accepts: ~w(html json)]
+  render_errors: [accepts: ~w(html json)],
+  check_origin: ["http://192.168.1.187", "http://garden.local", "//garden.local:80"]
 
 # Do not print debug messages in production
 config :logger, level: :info

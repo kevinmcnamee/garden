@@ -7,7 +7,7 @@ defmodule GardenFirmware.Ui do
 
   def init([]) do
     children = [
-      {GardenFirmware.Ui.Reporter, interval: 500}
+      {GardenFirmware.Ui.Reporter, interval: 5_000}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

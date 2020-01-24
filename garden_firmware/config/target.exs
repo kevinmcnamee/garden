@@ -34,14 +34,28 @@ config :nerves_init_gadget,
   mdns_domain: "garden.local",
   node_name: node_name,
   node_host: :mdns_domain,
-  ifname: "eth0",
+  ifname: "wlan0",
   address_method: :dhcp
 
 # Configure wireless settings
 
-_key_mgmt = System.get_env("NERVES_NETWORK_KEY_MGMT") || "WPA-PSK"
+key_mgmt = System.get_env("NERVES_NETWORK_KEY_MGMT") || "WPA-PSK"
 
 config :nerves_network, :default,
+  wlan0: [
+    networks: [
+      [
+        ssid: "McNaWifi",
+        psk: "colin1214",
+        key_mgmt: String.to_atom(key_mgmt)
+      ],
+      [
+        ssid: "McNaWifi_5G",
+        psk: "colin1214",
+        key_mgmt: String.to_atom(key_mgmt)
+      ]
+    ]
+  ],
   eth0: [
     ipv4_address_method: :dhcp
   ]

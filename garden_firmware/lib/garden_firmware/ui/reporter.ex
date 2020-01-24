@@ -7,17 +7,30 @@ defmodule GardenFirmware.Ui.Reporter do
 
   def init(opts) do
     interval = opts[:interval] || 1_000
-    broadcast_to_ui(interval)
+    Process.send_after(self(), :broadcast_to_ui, 10_000)
     {:ok, %{interval: interval}}
   end
 
   def handle_info(:broadcast_to_ui, state) do
-    broadcast_to_ui(state.interval)
+    data = %{
+      temperature: get_value("temperature"),
+      humidity: get_value("humidity")
+    }
+
+    UiWeb.Endpoint.broadcast("dashboard", "readings", data)
+
+    Process.send_after(self(), :broadcast_to_ui, state.interval)
+
     {:noreply, state}
   end
 
-  defp broadcast_to_ui(interval) do
-    UiWeb.Endpoint.broadcast("state", "reported", GardenFirmware.Dht.read())
-    Process.send_after(self(), :broadcast_to_ui, interval)
+  defp get_value(key) do
+    case GardenFirmware.Db.get(key) do
+      {:ok, value} ->
+        value
+
+      {:error, :not_found} ->
+        nil
+    end
   end
 end
